@@ -11,6 +11,7 @@
             <h5 class="card-title">{{ item.item_name }}</h5>    
             <p class="card-text">{{ item.item_desc }}</p>
             <p class="card-text">${{ item.item_price }}</p>
+            <a href="{% url 'food:delete_item' item.id %}" class="btn btn-primary">Delete</a>
         </div>
     </div>
 </div>
