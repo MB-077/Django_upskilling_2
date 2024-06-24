@@ -32,6 +32,25 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">View Item</a>
               </li>
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  {% comment %} <a class="nav-link active" aria-current="page" href="{% url "logout" %}" method="post">Logout</a> {% endcomment %}
+                  <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Log Out</button>
+                  </form>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url "profile" %}">Profile</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url "login" %}">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url "register" %}">Register</a>
+                </li>
+              {% endif %}
             </ul>
           </div>
         </div>

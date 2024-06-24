@@ -17,18 +17,24 @@
 </head>
 <body>
     {% block body %}
+    <br>
     {% for item in item_list %}
         <div class="row">
             <div class="col-md-3 offset-md-2">
                 <img class="card" height="150px" src="{{ item.item_image }}"/>
             </div>
             <div class="col-md-4" >
-                <h5 class="card-title">{{ item.item_name }}</h5>
-                <p class="card-text">{{ item.item_desc }}</p>
-                <p class="card-text">$ {{ item.item_price }}</p>
+                <h3 class="card-title">{{ item.item_name }}</h3>
+                <br>
+                <h5 class="card-text">{{ item.item_desc }}</h5>
+                <h6 class="card-text">$ {{ item.item_price }}</h6>
+                <h6 class="card-text">{{ item.user_name }}</h6>
+            </div>
+            <div class="col-md-3">
                 <a href="{% url "food:detail" item.id %}" class="btn btn-primary">View</a>
             </div>
         </div>
+    <br>
     {% endfor %}
     {% endblock %}
 </body>
