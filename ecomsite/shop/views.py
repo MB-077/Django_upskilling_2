@@ -19,3 +19,19 @@ def index(request):
 def detail(request, id):
     product_object = Product.objects.get(id=id)
     return render(request, 'shop/detail.html', {'product_object': product_object})
+
+def checkout(request):
+    if request.method == "POST":
+        items = request.POST.get("items")
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        address1 = request.POST.get("address1")
+        address2 = request.POST.get("address2")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        zipcode = request.POST.get("zipcode") 
+        total = request.POST.get("total")    
+        
+        order = Order(items=items, name=name, email=email, address1=address1, address2=address2, city=city, state=state, zipcode=zipcode, total=total)
+        order.save()
+    return render(request, 'shop/checkout.html')
