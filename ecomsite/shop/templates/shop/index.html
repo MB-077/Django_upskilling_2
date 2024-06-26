@@ -116,13 +116,6 @@
         console.log("The add to cart button is clicked");
         var item_id = this.id.toString();
         console.log(item_id);
-
-        {% comment %} if(cart[item_id] != undefined) {
-            cart[item_id] = cart[item_id] + 1;
-        } 
-        else{
-            cart[item_id] = 1;
-        } {% endcomment %}
         
         if(cart[item_id] != undefined) {
             quantity = cart[item_id][0] + 1;
@@ -161,13 +154,20 @@
             cartString = "<h5>This is your Cart</h5>";
             var cartIndex = 1;
             let cartObject = JSON.parse(localStorage.getItem("cart"));
-            
-            for (var item in cart) {
+
+            {% comment %} for (var item in cart) {
                 cartString += cartIndex + ". ";
-                {% comment %} cartString += document.getElementById("nm" + item).innerHTML + " Qty: " + cart[item] + "<br>"; {% endcomment %}
                 cartString += document.getElementById("nm" + item).innerHTML + " Qty: " + cart[item][0] + "<br>";
                 cartIndex += 1;
+            } {% endcomment %}
+
+            for (var item in cartObject) {
+                console.log(cartObject[item][0]);
+                console.log(cartObject[item][1]);
+                cartString += cartObject[item][1] + " Qty: " + cartObject[item][0] + "<br>";
+                cartIndex += 1;
             }
+
             cartString += '<br><a href="{% url "shop:checkout" %}" class="btn btn-warning" role="button" id="checkout">Checkout</a><br>';
             cartString += '<br><a href="{% url "shop:index" %}" class="btn btn-danger" id="clear" role="button">Clear Cart</a><br>';
             cartString += '<br><a href="{% url "shop:index" %}" class="btn btn-success" id="continue" role="button">Continue Shopping</a>';
@@ -176,7 +176,6 @@
         document.getElementById("cart").innerHTML = "Cart (" + Object.keys(cart).length + ")";
         document.getElementById("cart").setAttribute("data-bs-content", cartString);
 
-        // Reinitialize the popover to update its content
         $('[data-bs-toggle="popover"]').popover('dispose').popover({
             html: true,
             content: function() {
