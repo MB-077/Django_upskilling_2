@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'users/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body>
+    <nav class="shadow-lg">
+        <div class="px-4 mx-auto">
+            <div class="flex justify-between">
+                <!--Website logo-->
+                <div>
+                    <a class="flex" href="">
+                        <img class="h-8 w-8 mr-2" src="{% static 'users/images/social.png' %}" alt="">
+                        <span class="font-semibold text-lg text-gray-500">Photo App</span>
+                    </a>
+                </div>
+                <!--Website items-->
+                <div class="space-x-1">
+                    {% if request.user.is_authenticated %}
+                        <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                            {% csrf_token %}
+                        </form>
+                        <a class="py-4 px-2 font-semibold text-lg text-gray-500 cursor-pointer" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                    {% else %}
+                        <a class="py-4 px-2 font-semibold text-lg text-gray-500" href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                        <a class="py-4 px-2 font-semibold text-lg text-gray-500" href="">Link 1</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% block body %}{% endblock %}
+    <script>
+        function submitLogoutForm() {
+            document.getElementById('logout-form').submit();
+        }
+    </script>
+</body>
+</html>

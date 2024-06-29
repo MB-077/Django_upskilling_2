@@ -1,0 +1,30 @@
+{% extends 'users/base.html' %} 
+{% load form_tags %}
+
+{% block body %}
+    <h2 class="text-2xl m-10 font-bold text-center">👨🏻 Edit User Profile</h2>
+    <div class="flex justify-center items-center">
+        <form method="post" class="bg-white shadow-md px-8 rounded pt-6 pb-8 mb-4 w-4/5 bg-gradient-to-b from-green-400 via-blue-500 to-purple-600" enctype="multipart/form-data">
+            {% csrf_token %} 
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">First Name</label>
+                {{ user_form.first_name|add_class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" }}
+            </div>
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">Last Name</label>
+                {{ user_form.last_name|add_class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" }}
+            </div>
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                {{ user_form.email|add_class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" }}   
+            </div>
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="photo">Photo</label>
+                <div class="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    {{ profile_form.photo }}
+                </div>
+            </div>
+            <button type="submit" class="bg-green-500 text-black my-5 px-5 py-2 rounded">Submit</button>
+        </form>
+    </div>
+{% endblock %}
