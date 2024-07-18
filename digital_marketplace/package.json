@@ -1,0 +1,16 @@
+{
+  "name": "digital_marketplace",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss market/static/market/tw.css -o market/static/market/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "tailwindcss": "^2.2.16"
+  }
+}
